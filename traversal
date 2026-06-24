@@ -1,0 +1,71 @@
+import java.util.*;
+class Main {
+    public static void main(String[] args) {
+       Scanner sc=new Scanner(System.in);
+       int n=sc.nextInt();
+       int arr[]=new int[n];
+       for(int i=0;i<n;i++){
+           arr[i]=sc.nextInt();
+       }
+       Node root=new Node(arr[0]);
+       Queue<Node> q=new LinkedList<>();
+       q.offer(root);
+       for(int i=1;i<n;i++){
+           Node t=q.poll();
+           if(arr[i]!=-1){
+               t.left=new Node(arr[i]);
+               q.offer(t.left);
+           }
+           i++;
+           if(i<n&&arr[i]!=-1){
+                t.right=new Node(arr[i]);
+                q.offer(t.right);
+           }
+       }
+       System.out.println("Preorder:");
+       preorder(root);
+        System.out.println("");
+        System.out.println("Inorder:");
+         Inorder(root);
+          System.out.println("");
+         System.out.println("Postorder:");
+          postorder(root);
+    }
+    public static void preorder(Node root){
+        if(root==null)
+        return ;
+    System.out.print(root.data+" ");
+    preorder(root.left);
+    preorder(root.right);
+    
+    }
+    public static void Inorder(Node root){
+        if(root==null)
+        return ;
+    
+    Inorder(root.left);
+    System.out.print(root.data+" ");
+    Inorder(root.right);
+    
+    }
+    public static void postorder(Node root){
+        if(root==null)
+        return ;
+    
+    postorder(root.left);
+    postorder(root.right);
+     System.out.print(root.data+" ");
+    
+    }
+    
+}
+class Node{
+    int data;
+    Node left;
+    Node right;
+Node(int data){
+    this.data=data;
+    left=null;
+    right=null;
+}
+}
